@@ -10,18 +10,31 @@ class Database:
             self.cursor = None
 
 
-    def execute_query(self, query: str):
+    def execute_query(self, query: str, params = None):
         try:
-            self.cursor.execute(query)
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
             self.conn.commit()
         except psycopg2.Error as e:
             print(f"Bad query!: Error: {e}")
 
 
-    def fetch_query(self, query):
+    def fetch_query(self, query: str):
         try:
             self.cursor.execute(query)
             result = self.cursor.fetchall()
             return result
         except psycopg2.Error as e:
             print(f"Bad fetch! Error: {e}")
+            
+
+    def update_laptop_status(self, id, new_status):
+        query = "UPDATE laptops SET status = %s WHERE id = %s"
+        try:
+            self.execute_query(query, (new_status, id))
+            print('Status Updated')
+        except psycopg2.Error as e:
+            print(f"Bad query!: Error: {e}")
+
