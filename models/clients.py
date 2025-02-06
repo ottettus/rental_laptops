@@ -9,6 +9,6 @@ class Client:
         return(f"id: {self.id}, name: {self.name}, surname: {self.surname}, email: {self.email}")
     
     @classmethod
-    def display_all_clients(all_clients_list):
+    def display_all_clients(cls, all_clients_list):
         for client in all_clients_list:
             print(client)

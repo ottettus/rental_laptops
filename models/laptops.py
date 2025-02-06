@@ -11,6 +11,6 @@ class Laptop:
         return(f"id: {self.id}, mark: {self.mark}, model: {self.model}, spec: {self.spec}, status: {self.status}")
     
     @classmethod
-    def display_all_laptops(laptops_list):
+    def display_all_laptops(cls, laptops_list):
         for laptop in laptops_list:
             print(laptop)
