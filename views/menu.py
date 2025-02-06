@@ -1,4 +1,6 @@
 from controllers.rental_service import RentalServices
+from models.laptops import Laptop
+from models.clients import Client
 
 
 class Menu:
@@ -10,8 +12,9 @@ class Menu:
         print("1.Add new client")
         print("2.Delete client")
         print("3.View all clients")
-        print("4.Update laptop status")
-        print("5.Exit")
+        print("4.View all laptops")
+        print("5.Update laptop status")
+        print("6.Exit")
 
 
     def choice(self):
@@ -29,18 +32,23 @@ class Menu:
             elif choice == 2:
                 print("All clients:")
                 all_clients = self.rental_services.get_all_clients()
-                print(all_clients)
+                Client.display_all_clients(all_clients)
                 id = input("Input ID to delete")
                 self.rental_services.delete_client(id)
             elif choice == 3:
                 print("All clients:")
                 all_clients = self.rental_services.get_all_clients()
-                print(all_clients)
+                Client.display_all_clients(all_clients)
             elif choice == 4:
-                print(all_laptops = self.rental_services.get_all_laptops())
+                print("All laptops list:")
+                all_laptops = self.rental_services.get_all_laptops()
+                Laptop.display_all_laptops(all_laptops)
+            elif choice == 5:
+                print("all_laptops")
+                Laptop.display_all_laptops(all_laptops)
                 id = input("Input ID to delete")
                 self.rental_services.delete_laptop(id)
-            elif choice == 5:
+            elif choice == 6:
                 print("exiting...")
                 break
             else:

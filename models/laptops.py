@@ -5,9 +5,12 @@ class Laptop:
         self.model = model
         self.spec  = spec
         self.status = status
-
-    def change_status():
-        pass
+        
 
     def __str__(self):
-        return(f"mark: {self.mark}, model: {self.model}, spec: {self.spec}, status: {self.status}")
+        return(f"id: {self.id}, mark: {self.mark}, model: {self.model}, spec: {self.spec}, status: {self.status}")
+    
+    @classmethod
+    def display_all_laptops(laptops_list):
+        for laptop in laptops_list:
+            print(laptop)
