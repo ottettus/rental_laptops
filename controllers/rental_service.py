@@ -37,6 +37,15 @@ class RentalServices:
         except psycopg2.Error as e:
             print(f"Bad fetch! Error: {e}")
 
+
+    def delete_laptop(self, id:int):
+        query = "DELETE FROM laptops WHERE id=%s"
+        try:
+            self.db.execute_query(query, (id,))
+            print(f"Laptop with id={id} was deleted")
+        except psycopg2.Error as e:
+            print(f"Bad fetch! Error: {e}")
+
     
     def get_all_clients(self):
         query = "SELECT * FROM clients"

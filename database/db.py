@@ -28,7 +28,11 @@ class Database:
             return result
         except psycopg2.Error as e:
             print(f"Bad fetch! Error: {e}")
+            
 
-
+    def close_connection(self):
+        if self.conn:
+            self.cursor.close()
+            self.conn.close()
 
 
