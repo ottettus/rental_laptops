@@ -45,6 +45,7 @@ class Menu:
                 Laptop.display_all_laptops(all_laptops)
             elif choice == 5:
                 print("all_laptops")
+                all_laptops = self.rental_services.get_all_laptops()
                 Laptop.display_all_laptops(all_laptops)
                 id = input("Input ID to delete")
                 self.rental_services.delete_laptop(id)
