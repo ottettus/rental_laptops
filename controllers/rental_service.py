@@ -10,6 +10,15 @@ class RentalServices:
     def __init__(self):
         self.db = Database()
 
+    def new_client(self, name: str, surname:str, email:str):
+        client = Client(id = None, name = name, surname=surname, email=email)
+        client.add_new_client()
+
+    
+    def delete_client(self, id:int):
+        client_to_delete = Client(id=id, name=None, surname=None, email=None)
+        client_to_delete.delete_client()
+
 
     def update_laptop_status(self, id:str, new_status:str):
         query = "UPDATE laptops SET status = %s WHERE id = %s"
@@ -19,23 +28,6 @@ class RentalServices:
         except psycopg2.Error as e:
             print(f"Bad query!: Error: {e}")
 
-
-    def new_client(self, name:str, surname:str, email:str):
-        query = "INSERT INTO clients(name, surname, email) VALUES (%s, %s, %s)"
-        try:
-            self.db.execute_query(query,(name, surname, email))
-            print("New client addded")
-        except psycopg2.Error as e:
-            print(f"Bad fetch! Error: {e}")
-
-    
-    def delete_client(self, id:int):
-        query = "DELETE FROM clients WHERE id=%s"
-        try:
-            self.db.execute_query(query, (id,))
-            print(f"Client with id={id} was deleted")
-        except psycopg2.Error as e:
-            print(f"Bad fetch! Error: {e}")
 
 
     def delete_laptop(self, id:int):
