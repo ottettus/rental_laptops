@@ -30,6 +30,28 @@ class RentalServices:
         laptop_to_delete.delete_laptop()
 
 
+    def view_all_laptops(self):
+        query = "SELECT * FROM laptops"
+        try:
+            results = self.db.fetch_query(query)
+        except Exception as e:
+            print("All laptops list Error: {e}")
+        for result in results:
+                print(result)
+
+    
+    def View_all_clients(self):
+        query = "SELECT * FROM clients"
+        try:
+            result = self.db.fetch_query(query)
+        except Exception as e:
+            print("All clients list Error: {e}")
+        for result in result:
+            print(result)
+
+
+
+
     def update_laptop_status(self, id:str, new_status:str):
         query = "UPDATE laptops SET status = %s WHERE id = %s"
         try:
