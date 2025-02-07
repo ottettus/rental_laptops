@@ -20,6 +20,16 @@ class RentalServices:
         client_to_delete.delete_client()
 
 
+    def new_laptop(self, mark, model, spec):
+        laptop = Laptop(id=None, mark=mark, model=model, spec=spec, status=False)
+        laptop.add_laptop()
+
+
+    def delete_laptop(self, id:int):
+        laptop_to_delete = Laptop(id=id, mark=None, model= None, spec=None, status=None)
+        laptop_to_delete.delete_laptop()
+
+
     def update_laptop_status(self, id:str, new_status:str):
         query = "UPDATE laptops SET status = %s WHERE id = %s"
         try:
@@ -30,30 +40,30 @@ class RentalServices:
 
 
 
-    def delete_laptop(self, id:int):
-        query = "DELETE FROM laptops WHERE id=%s"
-        try:
-            self.db.execute_query(query, (id,))
-            print(f"Laptop with id={id} was deleted")
-        except psycopg2.Error as e:
-            print(f"Bad fetch! Error: {e}")
+    # def delete_laptop(self, id:int):
+    #     query = "DELETE FROM laptops WHERE id=%s"
+    #     try:
+    #         self.db.execute_query(query, (id,))
+    #         print(f"Laptop with id={id} was deleted")
+    #     except psycopg2.Error as e:
+    #         print(f"Bad fetch! Error: {e}")
 
     
-    def get_all_clients(self):
-        query = "SELECT * FROM clients"
-        try:
-            clients_data = self.db.fetch_query(query)
-            clients = [Client(id, name, surname, email) for id, name, surname, email in clients_data]
-            return clients
-        except psycopg2.Error as e:
-            print(f"Bad fetch! Error: {e}")
+    # def get_all_clients(self):
+    #     query = "SELECT * FROM clients"
+    #     try:
+    #         clients_data = self.db.fetch_query(query)
+    #         clients = [Client(id, name, surname, email) for id, name, surname, email in clients_data]
+    #         return clients
+    #     except psycopg2.Error as e:
+    #         print(f"Bad fetch! Error: {e}")
 
 
-    def get_all_laptops(self):
-        query = "SELECT * FROM laptops"
-        try:
-            laptops_data = self.db.fetch_query(query)
-            laptops = [Laptop(id, mark, model, spec, status) for (id, mark, model, spec, status) in laptops_data]
-            return laptops
-        except psycopg2.Error as e:
-            print(f"Bad fetch! Error: {e}")
+    # def get_all_laptops(self):
+    #     query = "SELECT * FROM laptops"
+    #     try:
+    #         laptops_data = self.db.fetch_query(query)
+    #         laptops = [Laptop(id, mark, model, spec, status) for (id, mark, model, spec, status) in laptops_data]
+    #         return laptops
+    #     except psycopg2.Error as e:
+    #         print(f"Bad fetch! Error: {e}")
