@@ -45,6 +45,8 @@ laptop_rental/
 │── main.py             # Entry point of the program
 │── README.md           # Project documentation
 │── requirements.txt    # Dependencies
+
+
 📝 Future Improvements
 
 Add a graphical user interface (GUI)
