@@ -18,7 +18,8 @@ class Menu:
         print("5.Add new laptop")
         print("6.Delete Laptop")
         print("7.Rent laptop")
-        print("8.Exit")
+        print("8.Return laptop")
+        print("9.Exit")
 
 
     def choice(self):
@@ -42,6 +43,8 @@ class Menu:
             elif choice == 7:
                 self.rent_laptop()
             elif choice == 8:
+                self.return_laptop()
+            elif choice == 9:
                 print("exiting...")
                 break
             else:
@@ -56,23 +59,23 @@ class Menu:
 
 
     def delete_client(self):
-        id = input("Input ID to delete")
+        id = input("Input ID to delete: ")
         self.rental_services.delete_client(id)
 
 
     def view_all_clients(self):
-        print("All clients:")
+        print("All clients: ")
         all_clients = self.rental_services.get_all_clients()
         Client.display_all_clients(all_clients)
 
 
     def all_laptops_list(self):
-        print("All laptops list:")
+        print("All laptops list: ")
         self.rental_services.view_all_laptops()
     
 
     def all_clients_list(self):
-        print("All clients list")
+        print("All clients list: ")
         self.rental_services.View_all_clients()
 
 
@@ -89,9 +92,15 @@ class Menu:
 
     
     def rent_laptop(self):
-        id_client = input("input client id:")
-        id_laptop = input("Input laptop id:")
+        id_client = input("input client id: ")
+        id_laptop = input("Input laptop id: ")
         self.rental_services.laptop_rent_ser(id_client,id_laptop)
+
+
+    def return_laptop(self):
+        id_laptop = input("Input ID laptop to return: ")
+        self.rental_services.laptop_return_ser(id_laptop)
+
 
 
 

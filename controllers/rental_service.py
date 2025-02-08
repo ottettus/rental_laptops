@@ -57,3 +57,9 @@ class RentalServices:
         new_res = Rental(id=None, client_id=id_client, laptop_id=id_laptop, rental_date=actualy_data, return_date=None, status='Open')
         new_res.create_rental()
 
+    
+    def laptop_return_ser(self, id_laptop):
+        actualy_data = datetime.now()
+        rent_status = Rental(id=None, client_id=None, laptop_id=id_laptop, rental_date=None, return_date=actualy_data, status='Close')
+        rent_status.update_rental_return_status()
+

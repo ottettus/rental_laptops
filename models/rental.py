@@ -39,14 +39,15 @@ class Rental:
 
 
     def update_rental_return_status(self):
-        query = "UPDATE rentals SET return_date = %s, status = %s WHERE id = %s"
+        query = "UPDATE rentals SET return_date = %s, status = %s WHERE laptop_id = %s"
         try:
-            self.return_date = datetime.now()
-            self.status = False
-            self.db.execute_query(query, (self.return_date, self.status, self.id))
+            self.db.execute_query(query, (self.return_date, self.status, self.laptop_id))
+            laptop = Laptop(id=self.laptop_id, mark='', model='', spec='', status=True)
+            laptop.update_laptop_rent_status(new_status=True, laptop_id=self.laptop_id)
             print(f"Update rental returned successfully")
         except Exception as e:
             print(f"Error returning rental: {e}")
+
 
     def __str__(self):
         return f"Rental {self.id}: Client {self.client_id}, Laptop {self.laptop_id}, Rental Date: {self.rental_date}, Return Date: {self.return_date}, Status: {'Active' if self.status else 'Returned'}"
