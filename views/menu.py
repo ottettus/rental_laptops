@@ -1,21 +1,23 @@
 from controllers.rental_service import RentalServices
 from models.laptops import Laptop
 from models.clients import Client
+from models.rental import Rental
 
 
 class Menu:
     def __init__(self):
         self.rental_services = RentalServices()
+        self.rental = Rental
 
     def display_menu(self):
 
         print("1.Add new client")
         print("2.Delete client")
-        print("3.View all clients")#
+        print("3.View all clients")
         print("4.View all laptops")
         print("5.Add new laptop")
         print("6.Delete Laptop")
-        print("7.Update laptop status")#
+        print("7.Rent laptop")
         print("8.Exit")
 
 
@@ -23,7 +25,7 @@ class Menu:
         
         while True:
             self.display_menu()
-            choice = int(input("Choice an option"))
+            choice = int(input("Choice an option: "))
 
             if choice == 1:
                 self.add_client()
@@ -38,12 +40,7 @@ class Menu:
             elif choice == 6:
                 self.delete_laptop()
             elif choice == 7:
-                pass
-                # print("all_laptops")
-                # all_laptops = self.rental_services.get_all_laptops()
-                # Laptop.display_all_laptops(all_laptops)
-                # id = input("Input ID to delete")
-                # self.rental_services.delete_laptop(id)
+                self.rent_laptop()
             elif choice == 8:
                 print("exiting...")
                 break
@@ -89,5 +86,13 @@ class Menu:
     def delete_laptop(self):
         id_to_delete = input("Input ID: ")
         self.rental_services.delete_laptop(id_to_delete)
+
+    
+    def rent_laptop(self):
+        id_client = input("input client id:")
+        id_laptop = input("Input laptop id:")
+        self.rental_services.laptop_rent_ser(id_client,id_laptop)
+
+
 
 

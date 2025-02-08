@@ -24,13 +24,14 @@ class Laptop:
             print("Laptop deleted!")
         except Exception as e:
             print(f"Error deleting laptop: {e}")
-            
-    
-    def update_laptop_rent_status(self):
-        query = "UPDATE laptop SET status = %s WHERE id = %s"
-        try:
-            self.db.execute_query(query, (self.id, self.status))
-        except Exception as e:
-            print(f"Update status Error: {e}")
 
+    
+    def update_laptop_rent_status(self, new_status:bool, client_id: int = None):
+        query = "UPDATE laptops SET status = %s WHERE id = %s"
+        try:
+            self.db.execute_query(query,(new_status, self.id))
+            if new_status and client_id:
+                query = "UPDATE rentals SET "
+        except Exception as e:
+            print("Error: {e}")
 

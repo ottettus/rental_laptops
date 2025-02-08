@@ -1,7 +1,9 @@
 
 from models.clients import Client
 from models.laptops import Laptop
+from models.rental import Rental
 from database.db import Database
+from datetime import datetime
 
 import psycopg2
 
@@ -50,42 +52,8 @@ class RentalServices:
             print(result)
 
 
+    def laptop_rent_ser(self, id_client, id_laptop):
+        actualy_data = datetime.now()
+        new_res = Rental(id=None, client_id=id_client, laptop_id=id_laptop, rental_date=actualy_data, return_date=None, status='Open')
+        new_res.create_rental()
 
-
-    def update_laptop_status(self, id:str, new_status:str):
-        query = "UPDATE laptops SET status = %s WHERE id = %s"
-        try:
-            self.db.execute_query(query, (new_status, id))
-            print('Status Updated')
-        except psycopg2.Error as e:
-            print(f"Bad query!: Error: {e}")
-
-
-
-    # def delete_laptop(self, id:int):
-    #     query = "DELETE FROM laptops WHERE id=%s"
-    #     try:
-    #         self.db.execute_query(query, (id,))
-    #         print(f"Laptop with id={id} was deleted")
-    #     except psycopg2.Error as e:
-    #         print(f"Bad fetch! Error: {e}")
-
-    
-    # def get_all_clients(self):
-    #     query = "SELECT * FROM clients"
-    #     try:
-    #         clients_data = self.db.fetch_query(query)
-    #         clients = [Client(id, name, surname, email) for id, name, surname, email in clients_data]
-    #         return clients
-    #     except psycopg2.Error as e:
-    #         print(f"Bad fetch! Error: {e}")
-
-
-    # def get_all_laptops(self):
-    #     query = "SELECT * FROM laptops"
-    #     try:
-    #         laptops_data = self.db.fetch_query(query)
-    #         laptops = [Laptop(id, mark, model, spec, status) for (id, mark, model, spec, status) in laptops_data]
-    #         return laptops
-    #     except psycopg2.Error as e:
-    #         print(f"Bad fetch! Error: {e}")
