@@ -1,5 +1,6 @@
 from datetime import datetime
 from database.db import Database
+from models.laptops import Laptop
 
 class Rental:
     def __init__(self, id=None, client_id=None, laptop_id=None, rental_date=None, return_date=None, status="Open"):
@@ -12,11 +13,27 @@ class Rental:
         self.db = Database()
 
 
+    def check_laptop_avaliablity(self, laptop_id):
+        query = "SELECT status FROM laptops WHERE id = %s"
+        result = self.db.fetch_query(query,(laptop_id,))
+        if result and result[0][0] == True:
+            return True
+        else:
+            print("Laptop is not avariable for rent")
+            return False
+
+
+
     def create_rental(self):
         query = "INSERT INTO rentals(client_id, laptop_id, rental_date, return_date, status) VALUES (%s, %s, %s, %s, %s)"
         try:
-            self.db.execute_query(query, (self.client_id, self.laptop_id, self.rental_date, self.return_date, self.status))
-            print(f"Rental created successfully")
+            if self.check_laptop_avaliablity(self.laptop_id):
+                self.db.execute_query(query, (self.client_id, self.laptop_id, self.rental_date, self.return_date, self.status))
+                laptop = Laptop(id=self.laptop_id, mark='', model='', spec='', status=False)
+                laptop.update_laptop_rent_status(new_status=False, laptop_id=self.laptop_id)
+                print(f"Rental created successfully")
+            else:
+                print("Rental creation failed")
         except Exception as e:
             print(f"Error creating rental: {e}")
 

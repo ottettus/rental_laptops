@@ -21,9 +21,12 @@ class Database:
             print(f"Bad query!: Error: {e}")
 
 
-    def fetch_query(self, query: str):
+    def fetch_query(self, query: str, params = None):
         try:
-            self.cursor.execute(query)
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
             result = self.cursor.fetchall()
             return result
         except psycopg2.Error as e:
