@@ -17,6 +17,34 @@ PostgreSQL + pgAdmin
 MVC architecture
 🛠 Installation
 
+How to Restore the Database
+
+To restore the database for this project, follow these steps:
+
+Download the Database Backup:
+The backup file is available in this repository under the name rental_laptops_db.dump.
+Install PostgreSQL:
+If you don't have PostgreSQL installed on your machine, please install it. Follow the instructions here:
+PostgreSQL Installation Guide.
+Create a New Database:
+Before restoring the backup, create a new database where the data will be loaded. You can do this through pgAdmin or using the command line.
+To create a new database from the command line, use the following command (replace your_database_name with your desired database name):
+
+createdb your_database_name
+Restore the Backup:
+After the new database is created, restore the backup by running the following command:
+pg_restore -U your_username -d your_database_name /path/to/rental_laptops_db.dump
+Replace your_username with your PostgreSQL username.
+Replace your_database_name with the name of the database you created.
+Replace /path/to/rental_laptops_db.dump with the actual path to the backup file.
+Example command:
+
+pg_restore -U postgres -d rental_laptops /path/to/rental_laptops_db.dump
+Check the Data:
+Once the restore is complete, you should see all the tables and data loaded into the new database. You can check this using pgAdmin or by running SQL queries in your terminal.
+Known Issues:
+If you encounter an error with foreign key constraints (e.g., rentals_laptop_id_fkey already exists), you can ignore it for now as the database was still loaded successfully.
+
 Clone the repository:
 git clone https://github.com/your-repo/laptop_rental.git
 cd laptop_rental
@@ -45,6 +73,8 @@ laptop_rental/
 │── main.py             # Entry point of the program
 │── README.md           # Project documentation
 │── requirements.txt    # Dependencies
+│── rental_laptops_db.dump    # Database backup for pgAdmin4
+
 
 
 📝 Future Improvements
